@@ -5,5 +5,6 @@ Start
 ```
 $ npm i
 
-$ node index.js
+// pwd: lesson1
+$ node index.js  
 ```
