@@ -20,6 +20,7 @@ class App {
             let {url} = request;
 
             let body = staticServer(url)
+            response.writeHead('200','wow!success',{'author': 'Evan Yann'})
             response.end(body)
         }
     }
