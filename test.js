@@ -1,5 +1,5 @@
 /**
- * Created by pengy on 2017/4/4.
+ * Created by StarLikeRain on 2017/4/4.
  */
 
 const assert = require('assert')
@@ -13,4 +13,11 @@ const p1 = p.then(val => {
 const p2 = p1.then(val => {
     console.log(val)
     assert.equal(2, val)
+})
+
+// thenable
+Promise.resolve({
+    then: (resolve, reject) => {
+        reject(1)
+    }
 })
