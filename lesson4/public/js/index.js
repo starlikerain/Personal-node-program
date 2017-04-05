@@ -25,12 +25,20 @@ setTimeout(function () {
         }
     })
 
+    /**
+     * @Simulator_POST_request
+     */
     $.ajax({
         url: '/list.action',
-        method: 'GET',
+        method: 'POST',
+
+        data:JSON.stringify([
+            'name','Evan Yann'
+        ]),
+
         // if return Array
         success: function (arr) {
-
+            debugger
             let liStr = arr.map((ele) => {
                 return `<li>${ele}</li>`
             }).join('')

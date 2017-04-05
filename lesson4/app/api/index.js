@@ -5,15 +5,30 @@
  * @FOR-AJAX
  */
 
-module.exports = (url) => {
-    console.log('from apiServer url : ',url)
-    // 『 rewritten as Promise 』
-    return new Promise((resolve, reject) => {
-        let apiMap = {
-            '/list.action': ['list1', 'list2', 'list3'],
-            '/user.action': ['user1', 'user2', 'user3']
-        }
-        resolve(apiMap[url])
-    })
-    // dynamic
+module.exports = (request) => {
+    //prototype, __proto__, readable, stream, eventEmmiter
+    let {url, method, context} = request
+
+    // request.context = {
+    //     body: '',
+    //     query: {},
+    //     method: 'get'
+    // }
+
+    let apiMap = {
+        '/list.action': ['list1', 'list2', 'list3'],
+        '/user.action': ['user1', 'user2', 'user3']
+    }
+
+    if (method.toLowerCase() == 'get') {
+        return Promise.resolve(apiMap[url])
+    } else {
+        // handle post B === socket ===S  ;  (browser, server)
+        /**
+         * @post_method
+         */
+        let {body} = context
+
+        return Promise.resolve(body)
+    }
 }

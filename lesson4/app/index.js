@@ -13,7 +13,7 @@ const staticServer = require('./static-server')
  * @myAPIserver
  */
 const apiServer = require('./api')
-
+const urlParser = require('./url-parser')
 
 class App {
     constructor() {
@@ -21,76 +21,44 @@ class App {
     }
 
     initServer(req, res) {
-        //『 middleware 』
-        // const str = require('../package.json')
+        // 「 node.js default parse as '.js' & '.json' 」
 
-
-
-        // April 4 ON WINDOWS --->>  modify as promise chain mode
+        // April 4 ON WINDOWS --->>  modify logic as promise chain mode
         return (request, response) => {
-            let {url} = request
+            let {url, method} = request
 
-            apiServer(url).then(val => {
-                if(!val){
-                    return staticServer(url)
+            request.context = {
+                body: '',
+                query: {},
+                method: 'get'
+            }
+            // request: query + body + method
+            urlParser(request).then(() => {
+                // urlParser(request) mounted request.body furtively
+                return apiServer(request)
+            }).then(val => {
+                if (!val) {
+                    return staticServer(request)
                 } else {
+                    console.log('FE data go !')
                     return val
                 }
             }).then(val => {
-                let base = {'presentBy':'Evan Yann'}
+                let base = {'presentBy': 'Evan Yann'}
                 let body = ''
-                if(val instanceof Buffer){
+                if (val instanceof Buffer) {
                     body = val
-                }else {
+                } else {
                     body = JSON.stringify(val)
-                    let finalHeader = Object.assign(base,{
-                        'Content-Type':'application/json'
+                    let finalHeader = Object.assign(base, {
+                        'Content-Type': 'application/json'
                     })
-                    response.writeHead(200,'success', finalHeader)
+                    response.writeHead(200, 'success', finalHeader)
+                    console.log('FE data detail ----->>>>>>>',body)
                 }
                 response.end(body)
             })
         }
-
-
-        // 『 main logic here』
-        // 「 default parse as '.js' & '.json' 」
-
-
-        // return (request, response) => {
-        //
-        //     // 『when ajax request
-        //     //    inside IncomingMessage headers
-        //     //   will include
-        //     //  ---->>>  x-request-with: 'XMLHttpRequest'
-        //     // 』
-        //     let {url} = request
-        //
-        //     // 『返回的字符串 or buffer』
-        //     let body = ''
-        //     let headers = {}
-        //
-        //     /**
-        //      * @if-AJAX-REQUEST
-        //      */
-        //     if (url.match('action')) {
-        //         apiServer(url).then(val => {
-        //             body = JSON.stringify(val)
-        //             headers = {
-        //                 'Content-Type': 'application/json'
-        //             }
-        //             let finalHeader = Object.assign(headers, {'author': 'Evan Yann'})
-        //             response.writeHead('200', 'wow!success', finalHeader)
-        //             response.end(body)
-        //         })
-        //     } else {
-        //         staticServer(url).then((body) => {
-        //             let finalHeader = Object.assign(headers, {'author': 'Evan Yann'})
-        //             response.writeHead('200', 'wow!success', finalHeader)
-        //             response.end(body)
-        //         })
-        //     }
-        // }
     }
 }
 

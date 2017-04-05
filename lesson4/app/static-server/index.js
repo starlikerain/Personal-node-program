@@ -14,8 +14,8 @@ let getPath = (url) => {
 }
 
 // 『 Static resource server 』
-let staticFunc = (url) => {
-
+let staticFunc = (request) => {
+    let {url} = request
     // Promise
     return new Promise((resolve, reject) => {
 
