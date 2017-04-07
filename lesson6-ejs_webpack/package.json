@@ -1,0 +1,24 @@
+{
+  "name": "node-notebook",
+  "version": "1.0.0",
+  "description": "a node note book",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --inspect index.js",
+    "test": "nodemon test/index.js"
+  },
+  "keywords": [
+    "node",
+    "note",
+    "book"
+  ],
+  "author": "Evan Yann",
+  "license": "MIT",
+  "devDependencies": {
+    "axios": "^0.15.3",
+    "nodemon": "^1.11.0"
+  },
+  "dependencies": {
+    "ejs": "^2.5.6"
+  }
+}
