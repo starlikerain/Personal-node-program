@@ -38,7 +38,7 @@ setTimeout(function () {
 
         // if return Array
         success: function (arr) {
-            debugger
+
             let liStr = arr.map((ele) => {
                 return `<li>${ele}</li>`
             }).join('')
@@ -50,5 +50,5 @@ setTimeout(function () {
             console.log(error)
         }
     })
-}, 1000)
+}, 500)
 

@@ -23,6 +23,7 @@
 const ejs = require('ejs')
 const fs = require('fs')
 const path = require('path')
+const mime = require('mime')
 
 let viewServer = (ctx) => {
     let {req, resCtx} = ctx
@@ -41,16 +42,18 @@ let viewServer = (ctx) => {
             if (urlMap[url]) {
                 let {viewName} = urlMap[url]
                 let htmlPath = path.resolve(viewPath, viewName)
-                let temStr = fs.readFileSync(htmlPath,'utf-8')
+                resCtx.headers = Object.assign(resCtx.headers, {
+                    'Content-Type': mime.lookup(htmlPath)
+                })
+                let temStr = fs.readFileSync(htmlPath, 'utf-8')
                 let render = ejs.compile(temStr, {
                     compileDebug: true
                 })
-                resCtx.body = render()
+                resCtx.body = render({hello: 'world'}) // 返回给前端的内容
                 resolve()
             } else {
                 resolve()
             }
-
         }
     })
 

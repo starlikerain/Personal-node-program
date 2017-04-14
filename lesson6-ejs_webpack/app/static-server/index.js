@@ -19,6 +19,7 @@
 
 const fs = require('fs')
 const path = require('path')
+const mime = require('mime')
 
 const DIY_path = 'public'
 
@@ -33,14 +34,11 @@ let staticFunc = (ctx) => {
     // Promise
     return new Promise((resolve, reject) => {
         // 『 staticServer只做静态资源的response 』
-        if (!url.match('action')) {
-            // 『 我日 为啥这里删掉 没有bug 』
-            // if (url === '/') {
-            //     url = '/index.html'
-            // }
-
+        if (url.match(/\./) && !url.match('action')) { // 这里match . 是为了mime不因为解析的是目录 从而解析不到 (default: application/octet-stream)
             let _path = getPath(url)
-
+            resCtx.headers = Object.assign(resCtx.headers, {
+                'Content-Type': mime.lookup(_path)
+            })
             // 『 unnecessary appoint extend  』
             fs.readFile(_path, (err, data) => {
                 if (err) {
@@ -50,7 +48,7 @@ let staticFunc = (ctx) => {
                 resCtx.body = data
                 resolve()
             })
-        }else {
+        } else {
             resolve()
         }
 
