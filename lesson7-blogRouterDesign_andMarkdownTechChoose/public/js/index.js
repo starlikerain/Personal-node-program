@@ -6,12 +6,16 @@
  * @request
  */
 
-setTimeout(function () {
+require('../css/index.scss');
+
+require('highlight.js').initHighlightingOnLoad()
+
+setTimeout(function() {
     $.ajax({
         url: '/user.action',
         method: 'GET',
         // if return Array
-        success: function (arr) {
+        success: function(arr) {
 
             let liStr = arr.map((ele) => {
                 return `<li>${ele}</li>`
@@ -19,7 +23,7 @@ setTimeout(function () {
 
             $('#root').html(liStr)
         },
-        error: function (error) {
+        error: function(error) {
             console.log('error')
             console.log(error)
         }
@@ -32,12 +36,12 @@ setTimeout(function () {
         url: '/list.action',
         method: 'POST',
 
-        data:JSON.stringify([
-            'name','Evan Yann'
+        data: JSON.stringify([
+            'name', 'Evan Yann'
         ]),
 
         // if return Array
-        success: function (arr) {
+        success: function(arr) {
 
             let liStr = arr.map((ele) => {
                 return `<li>${ele}</li>`
@@ -45,10 +49,9 @@ setTimeout(function () {
 
             $('#shop').html(liStr)
         },
-        error: function (error) {
+        error: function(error) {
             console.log('error')
             console.log(error)
         }
     })
-}, 1000)
-
+}, 500)
