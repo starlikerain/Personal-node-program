@@ -29,13 +29,15 @@ let urlParser = (ctx) => {
 
     return Promise.resolve({
         then: (resolve, reject) => {
-
             if (method === 'post') {
+                console.log(url)
+                debugger
                 let data = []
                 // paused stream, flow stream
                 ctx.req.on('data', (chunk) => {
                     data.push(chunk)
                 }).on('end', () => {
+                    debugger
                     let endData = Buffer.concat(data).toString()
                     reqCtx.body = JSON.parse(endData)
                     // notification next guy

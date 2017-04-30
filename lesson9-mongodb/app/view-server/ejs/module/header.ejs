@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Power By Node.js</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <!--<link rel="stylesheet" href="./css/index.css">-->
+    <link rel="stylesheet" href="/dist/common.css">
+    <link rel="stylesheet" href="/dist/index.css">
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.js"></script>
+</head>
+
+<body>
+
+<div class='header clear-fix'>
+    <div class='avatar'>
+        <img src='/img/avatar.jpg'/>
+    </div>
+    <ul class='nav'>
+        <li>
+            <a href='/'>首页</a>
+        </li>
+        <li>
+            <a href='/about'>关于</a>
+        </li>
+
+
+        <li>
+            <a href='/list'>博客列表</a>
+        </li>
+
+        <%if(hasUser){%>
+        <li>
+            <a href='/write'>写博客</a>
+        </li>
+        <% }%>
+
+        <li>
+            <a href="/Evan_Yann">登录</a>
+        </li>
+        <li>
+            <a href="/logout">退出</a>
+        </li>
+
+        <li>
+            <form class="search"
+                  action="//google.com/search" method="get" accept-charset="utf-8">
+                <label>搜索</label>
+                <input type="search" id="search" name="q"
+                       autocomplete="off" maxlength="20" placeholder="搜索">
+                <input type="hidden" name="q" value="site:slashhuang.github.io">
+            </form>
+        </li>
+    </ul>
+</div>

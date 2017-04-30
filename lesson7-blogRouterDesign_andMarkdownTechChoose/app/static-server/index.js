@@ -31,6 +31,7 @@ let getPath = (url) => {
 
 // 『 Static resource server 』
 let staticFunc = (ctx) => {
+    console.log('static-server')
     let { url } = ctx.req
     let { resCtx } = ctx
     // Promise

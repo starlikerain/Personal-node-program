@@ -24,6 +24,7 @@ const mime = require('mime')
 const urlRewriteMap = require('./urlRewrite')
     // router ==> controller ==> result MVC
 let viewServer = (ctx) => {
+    console.log('view-server')
     let { req, resCtx } = ctx
     let { url } = req
     console.log('url      ', url)

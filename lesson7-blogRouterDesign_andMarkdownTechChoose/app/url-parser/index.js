@@ -22,6 +22,7 @@
 // }
 
 let urlParser = (ctx) => {
+    console.log('url-parser')
 
     let { method, url, context } = ctx.req
     let { reqCtx } = ctx

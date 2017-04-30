@@ -5,7 +5,8 @@
  */
 const http = require('http')
 const PORT = 7000
-// 『get ./app/index.js』
+    // 『get ./app/index.js』
+    // 这个里面就是搞到了类似nginx 那种服务器门卫的感觉
 const App = require('./app')
 
 const server = new App()

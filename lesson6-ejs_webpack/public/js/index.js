@@ -33,7 +33,7 @@ setTimeout(function () {
         method: 'POST',
 
         data:JSON.stringify([
-            'name','Evan Yann'
+            '前端','发给后台的'
         ]),
 
         // if return Array

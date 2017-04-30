@@ -19,6 +19,7 @@
 // }
 
 let apiFunc = (ctx) => {
+    console.log('api server')
 
     //prototype, __proto__, readable, stream, eventEmmiter
     let { url, method } = ctx.req

@@ -20,6 +20,7 @@ class App {
 
     // 创建promise链条
     composeMiddleware(context) {
+        debugger
         let { middlewareArr } = this
         // according middleware, create Promise chain
         for (let middleware of middlewareArr) {
@@ -36,8 +37,10 @@ class App {
 
     initServer(req, res) {
         // 「 node.js default parse as '.js' & '.json' 」
+        console.log('app->index.js')
 
         return (request, response) => {
+
             let { url, method } = request
 
             let context = {
@@ -60,7 +63,6 @@ class App {
             // 『 3.开发者可以专注于中间介的开发 』
 
             // 函数体可以百年不变
-
             this.composeMiddleware(context)
                 .then(() => {
                     let { body, headers, statusCode, statusMessage } = context.resCtx
